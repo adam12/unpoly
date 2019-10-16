@@ -37,12 +37,15 @@ up.log = do ->
     prints to the developer console.
   @param {string} [options.prefix='[UP] ']
     A string to prepend to Unpoly's logging messages so you can distinguish it from your own messages.
+  @param {boolean} [options.displayBanner=true]
+    Whether the Unpoly banner should be displayed when the framework has booted.
   @stable
   ###
   config = new up.Config
     prefix: '[UP] '
     enabled: sessionStore.get('enabled')
     collapse: false
+    displayBanner: true
 
   reset = ->
     config.reset()
@@ -188,6 +191,8 @@ up.log = do ->
       console.error(prefix(message), args...)
 
   printBanner = ->
+    return unless config.displayBanner
+
     # The ASCII art looks broken in code since we need to escape backslashes
     banner = " __ _____  ___  ___  / /_ __\n" +
              "/ // / _ \\/ _ \\/ _ \\/ / // /  #{up.version}\n" +

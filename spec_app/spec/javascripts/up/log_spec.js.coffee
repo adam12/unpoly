@@ -3,6 +3,20 @@ $ = jQuery
 
 describe 'up.log', ->
 
+  describe 'Banner', ->
+
+    it 'can be disabled', ->
+      spyOn(console, 'log')
+
+      up.log.displayBanner = false
+      up.log.printBanner()
+      expect(console.log).not.toHaveBeenCalled()
+
+      up.log.displayBanner = true
+      up.log.printBanner()
+      expect(console.log).toHaveBeenCalled()
+
+
   describe 'JavaScript functions', ->
 
     describe 'up.log.puts', ->
